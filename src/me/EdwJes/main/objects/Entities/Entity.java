@@ -1,16 +1,15 @@
 package me.EdwJes.main.objects.Entities;
 
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Rectangle;
 
 import me.EdwJes.main.Main;
-import me.EdwJes.main.input.Control;
 import me.EdwJes.main.objects.InteractiveObject;
 
 public class Entity extends InteractiveObject {
+	
+	public final int RIGHT = 1;
+	public final int LEFT = -1;
 	
 	public double jumpPower = 11, 
 			speed = 0.7, 
@@ -20,14 +19,10 @@ public class Entity extends InteractiveObject {
 			vspeed = 0, 
 			hspeed = 0,
 			gravity = 0.4;
-	
-	Control control;
-	
 
 	public Entity(float x, float y){
-		setInput();
-		this.x=x;
-		this.y=y;
+		this.setX(x);
+		this.setY(y);
 		hitbox=new Rectangle(x, y, 32, 64);
 	}
 
@@ -35,22 +30,30 @@ public class Entity extends InteractiveObject {
 	public void update() {
 		super.update();
 		ApplyForces();
-		move();
+		move((float)hspeed, (float)vspeed);
 
 	}
 	
-	@Override
-	public void render(Graphics g){
-		g.setColor(Color.white);
-		g.draw(getHitbox());
+	public void jump(){
+		vspeed -= jumpPower;
 	}
 	
-	
+	public void walk(int direction){
+		switch(direction){
+		case RIGHT:
+			hspeed += speed;
+			break;
+		
+		case LEFT:
+			hspeed -= speed;
+			break;
+		}
+	}
 	
 	public void ApplyForces(){
 
 		if(vspeed >= (maxFallSpeed-gravity)){
-			vspeed = maxSpeed;
+			vspeed = maxFallSpeed;
 		}
 		else{
 			vspeed += gravity;
@@ -64,50 +67,8 @@ public class Entity extends InteractiveObject {
 		}
 	}
 	
-	protected void move(){
-		x += hspeed;
-		y += vspeed;
-	}
-	
-	private void setInput(){
-		control = new Control(){
-
-			@Override
-			public void keyPressed(int key, char keyChar) {
-				switch(key){
-					case Input.KEY_Z:
-						vspeed -= jumpPower;
-						break;
-				}
-				
-			}
-
-			@Override
-			public void keyReleased(int arg0, char arg1) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void inputEnded() {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void inputStarted() {
-				// TODO Auto-generated method stub
-			}
-
-
-
-			@Override
-			public void setInput(Input arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			
-		};
+	protected void move(float dx, float dy){
+		setX(getX() + dx);
+		setY(getY() + dy);
 	}
 }

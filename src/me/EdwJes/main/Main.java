@@ -9,7 +9,11 @@ public class Main {
 	
 	public final static String TITLE = "GAME GAIN";
 	public final static int WINDOW_WIDTH = 1024,WINDOW_HEIGHT = 756;
+	public final static int TILE_SIZE = 16;
+	
+	static public Input input;
 
+	public static View view;
 
 	public static void main(String[] args) {
 		try{
@@ -34,6 +38,10 @@ public class Main {
 			return 0;
 		}
 		else return old - speed*Math.signum(old);
+	}
+	
+	public static GameContainer getContainer(){
+		return container;
 	}
 
 }

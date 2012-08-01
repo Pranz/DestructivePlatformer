@@ -3,6 +3,8 @@ package me.EdwJes.main.objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.EdwJes.main.View;
+
 import org.newdawn.slick.Graphics;
 
 public abstract class RenderableObject extends GameObject {
@@ -13,7 +15,7 @@ public abstract class RenderableObject extends GameObject {
 		list.add(this);
 	}
 	
-	public abstract void render(Graphics g);
+	public abstract void render(Graphics g, View view);
 
 
 }
