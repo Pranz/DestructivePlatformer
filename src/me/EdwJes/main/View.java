@@ -6,19 +6,6 @@ import java.util.List;
 import me.EdwJes.main.input.PlayerInput;
 import me.EdwJes.main.objects.Entities.Entity;
 
-
-
-/**
-* View Class
-* 
-* <P>The view port system. 
-*  
-* <P>Testing links, class: {@link BigDecimal} 
-* See constructor {@link #posMoveX(int)} for more information.
-*  
-* @author Lolirofle
-* @version 1.0
-*/
 public class View extends Updater {
 	public static List<View> list = new ArrayList<View>();
 	
@@ -27,25 +14,25 @@ public class View extends Updater {
 	double speed = 5;
 	
 	public boolean isFollowing = false;
-	Entity target;
+	int followID;
 	
 	public void followObject(Entity target){
 		isFollowing = true;
-		this.target = target;
 	}
 	
 
 	@Override
 	public void update(){
 		if(isFollowing){
-			x = target.getX();
-			y = target.getY();
+			x = PlayerInput.getPlayer(followID).ent.getX();
+			y = PlayerInput.getPlayer(followID).ent.getY();
 		}
 	}
 
 
-	public void followPlayer(PlayerInput player) {
-		followObject(player.ent);
+	public void followPlayer(int ID) {
+		isFollowing = true;
+		followID = ID;
 		
 	}
 }

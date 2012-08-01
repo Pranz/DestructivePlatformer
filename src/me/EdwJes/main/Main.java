@@ -12,7 +12,6 @@ public class Main {
 	public final static int TILE_SIZE = 16;
 	
 	static public Input input;
-
 	public static View view;
 
 	public static void main(String[] args) {

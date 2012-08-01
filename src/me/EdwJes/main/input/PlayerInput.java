@@ -3,6 +3,7 @@ package me.EdwJes.main.input;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.EdwJes.main.Main;
 import me.EdwJes.main.View;
 import me.EdwJes.main.objects.Entities.Entity;
 import org.newdawn.slick.Input;
@@ -36,7 +37,6 @@ public class PlayerInput {
 		inputs++;
 		setInput();
 		this.ent = ent;
-		view = new View();
 		
 		KEY_RIGHT = Input.KEY_RIGHT;
 		KEY_LEFT  = Input.KEY_LEFT;
@@ -74,10 +74,10 @@ public class PlayerInput {
 					ent.walk(ent.LEFT);
 				}
 				if(pressedKeys.contains(Input.KEY_D)){
-					view.x += 2;
+					Main.view.x -= 2;
 				}
 				if(pressedKeys.contains(Input.KEY_A)){
-					view.x -= 2;
+					Main.view.x += 2;
 				}
 			}
 

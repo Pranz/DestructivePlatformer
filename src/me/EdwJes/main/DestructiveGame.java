@@ -33,8 +33,7 @@ public class DestructiveGame implements Game {
 		Main.input = container.getInput();
 		testEntity = new Entity(40, Main.WINDOW_HEIGHT/2);
 		player = new PlayerInput(testEntity);
-		Main.view.followPlayer(player);
-		new Block(32, Main.WINDOW_HEIGHT - 64, 4, 4);
+		new Block(32, Main.WINDOW_HEIGHT - 64, 1, 4);
 
 
 	}
@@ -42,7 +41,7 @@ public class DestructiveGame implements Game {
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		for(RenderableObject object: RenderableObject.list){
-			object.render(g, PlayerInput.getPlayer(0).view);
+			object.render(g, Main.view);
 		}
 		
 		g.drawString("Vspeed: "+testEntity.vspeed,0,0);
