@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.EdwJes.main.Main;
-import me.EdwJes.main.View;
-import me.EdwJes.main.objects.Entities.Entity;
+import me.EdwJes.main.objects.entities.Entity;
+
 import org.newdawn.slick.Input;
 
 public class PlayerInput {
@@ -27,8 +27,6 @@ public class PlayerInput {
 	KEY_JUMP,
 	KEY_SHOOT,
 	KEY_RELOAD;
-
-	public View view;
 	
 	public PlayerInput(Entity ent){
 		

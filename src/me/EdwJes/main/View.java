@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.EdwJes.main.input.PlayerInput;
-import me.EdwJes.main.objects.Entities.Entity;
+import me.EdwJes.main.objects.entities.Entity;
 
 public class View extends Updater {
 	public static List<View> list = new ArrayList<View>();
@@ -24,8 +24,8 @@ public class View extends Updater {
 	@Override
 	public void update(){
 		if(isFollowing){
-			x = PlayerInput.getPlayer(followID).ent.getX();
-			y = PlayerInput.getPlayer(followID).ent.getY();
+			x = PlayerInput.getPlayer(followID).ent.x;
+			y = PlayerInput.getPlayer(followID).ent.y;
 		}
 	}
 

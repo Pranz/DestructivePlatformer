@@ -1,4 +1,4 @@
-package me.EdwJes.main.objects.Block;
+package me.EdwJes.main.objects.block;
 
 import org.newdawn.slick.geom.Rectangle;
 
@@ -8,14 +8,12 @@ import me.EdwJes.main.objects.InteractiveObject;
 public class Block extends InteractiveObject{
 	private int width=1,height=1;
 	
-	public Block(){}
-	
-	public Block(float x, float y, int width,int height){
-		setX(x);
-		setY(y);
+	public Block(int x, int y, int width,int height){
+		super(x, y);
 		this.width=width;
 		this.height=height;
-		hitbox = new Rectangle(getX(), getY(), width * Main.TILE_SIZE, height * Main.TILE_SIZE);
+		hitbox = new Rectangle(x, y, width * Main.TILE_SIZE, height * Main.TILE_SIZE);
+		
 	}
 	
 	public int getWidth(){

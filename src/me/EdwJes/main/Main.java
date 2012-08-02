@@ -27,7 +27,7 @@ public class Main {
 		app=new AppGameContainer(new DestructiveGame(), 1024, 756, false);
 		app.setUpdateOnlyWhenVisible(false);
 		app.setTitle(TITLE);
-		app.setShowFPS(true);
+		app.setShowFPS(false);
 		app.setTargetFrameRate(60);
 		return app;
 	}
