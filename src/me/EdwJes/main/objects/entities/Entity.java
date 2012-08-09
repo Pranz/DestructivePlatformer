@@ -91,7 +91,6 @@ public class Entity extends InteractiveObject {
 				while(!placeMeeting(x, y + Math.signum(dy))){
 					y += Math.signum(dy);
 				}
-				y = Math.round(y);
 				vspeed = 0;
 			}
 			if(!placeMeeting(x + dx, y)){

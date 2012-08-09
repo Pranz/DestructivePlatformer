@@ -41,11 +41,13 @@ public class DestructiveGame implements Game {
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
+		g.translate(Main.view.x, Main.view.y);
 		for(RenderableObject object: RenderableObject.list){
-			object.render(g, Main.view);
+			object.render(g);
 		}
 		List<String> stringList = new ArrayList<String>();
 		
+		g.translate(-Main.view.x, -Main.view.y);
 		stringList.add("FPS: " + Main.getContainer().getFPS());
 		stringList.add("vspeed: " + testEntity.vspeed);
 		stringList.add("hspeed: " + testEntity.hspeed);

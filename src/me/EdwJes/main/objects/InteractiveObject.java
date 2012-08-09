@@ -3,8 +3,6 @@ package me.EdwJes.main.objects;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.EdwJes.main.View;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;
@@ -29,12 +27,9 @@ public abstract class InteractiveObject extends RenderableObject{
 	}
 	
 	@Override
-	public void render(Graphics g, View view){
+	public void render(Graphics g){
 		g.setColor(Color.white);
-		Shape tempBox = hitbox;
-		g.draw(tempBox);
-		tempBox.setLocation(tempBox.getX() + view.x, tempBox.getY() + view.y);
-		g.draw(tempBox);
+		g.draw(hitbox);
 	}
 	
 	@Override
