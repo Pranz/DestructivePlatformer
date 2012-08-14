@@ -25,8 +25,10 @@ public class PlayerInput {
 	KEY_UP,
 	KEY_DOWN,
 	KEY_JUMP,
-	KEY_SHOOT,
-	KEY_RELOAD;
+	KEY_ACTION1,
+	KEY_ACTION2;
+	
+	int KEY_ACTION[] = new int[2];
 	
 	public PlayerInput(Entity ent){
 		
@@ -36,13 +38,13 @@ public class PlayerInput {
 		setInput();
 		this.ent = ent;
 		
-		KEY_RIGHT = Input.KEY_RIGHT;
-		KEY_LEFT  = Input.KEY_LEFT;
-		KEY_UP    = Input.KEY_UP;
-		KEY_DOWN  = Input.KEY_DOWN;
-		KEY_JUMP  = Input.KEY_Z;
-		KEY_SHOOT = Input.KEY_X;
-		KEY_RELOAD= Input.KEY_R;
+		KEY_RIGHT     = Input.KEY_RIGHT;
+		KEY_LEFT      = Input.KEY_LEFT;
+		KEY_UP        = Input.KEY_UP;
+		KEY_DOWN      = Input.KEY_DOWN;
+		KEY_JUMP      = Input.KEY_Z;
+		KEY_ACTION[0] = Input.KEY_X;
+		KEY_ACTION[1] = Input.KEY_SPACE;
 		
 	}
 	
@@ -56,11 +58,16 @@ public class PlayerInput {
 			@Override
 			public void keyPressed(int key, char keyChar) {
 				super.keyPressed(key, keyChar);
+				
 				if(key == KEY_JUMP){
 					ent.jump();
 				}
-
-
+				
+				for(int i=0; i<KEY_ACTION.length; i++){
+					if(key == KEY_ACTION[i]){
+						ent.action[i].onKeyPress();
+					}
+				}
 			}
 			
 			@Override
@@ -76,6 +83,23 @@ public class PlayerInput {
 				}
 				if(pressedKeys.contains(Input.KEY_A)){
 					Main.view.x += 2;
+				}
+				
+				for(int i=0; i<KEY_ACTION.length; i++){
+					if(pressedKeys.contains(KEY_ACTION[i])){
+						ent.action[i].onKeyDown();
+					}
+				}
+			}
+			
+			@Override
+			public void keyReleased(int key, char keyChar) {
+				super.keyReleased(key, keyChar);
+				
+				for(int i=0; i<KEY_ACTION.length; i++){
+					if(key == KEY_ACTION[i]){
+						ent.action[i].onKeyRelease();
+					}
 				}
 			}
 

@@ -1,16 +1,30 @@
 package me.EdwJes.main.objects.entities;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 
 import me.EdwJes.main.Main;
 import me.EdwJes.main.objects.InteractiveObject;
+import me.EdwJes.main.objects.entities.action.Action;
+import me.EdwJes.main.objects.entities.action.MeleeAttack;
 
 public class Entity extends InteractiveObject {
 	
-	public final int RIGHT = 1;
-	public final int LEFT = -1;
+	public final int RIGHT = 1,
+	LEFT = -1,
+	ACTIONS = 2;
+	
+	
+	public int width  = 32;
+	public int height = 64;
+	
+	public Action[] action;
+	
+	public List<Double> speedMods = new ArrayList<Double>();
 	
 	public double jumpPower = 11, 
 			speed = 0.7, 
@@ -23,30 +37,42 @@ public class Entity extends InteractiveObject {
 
 	public Entity(float x, float y){
 		super(x, y);
-		hitbox=new Rectangle(x, y, 32, 64);
+		action = new Action[ACTIONS];
+		action[0] = new MeleeAttack(this);
+		action[1] = new MeleeAttack(this);
+		hitbox=new Rectangle(x, y, width, height);
 		solid = false;
 	}
 
 	@Override
 	public void update() {
 		super.update();
+		setSpeeds();
 		ApplyForces();
 		move((float)hspeed, (float)vspeed);
 
 	}
 	
+	@Override
+	protected void updateHitbox(){
+		hitbox.setX(x - width /2);
+		hitbox.setY(y - height/2);
+	}
+	
 	public void jump(){
-		vspeed = -jumpPower;
+		if(onGround()){
+			vspeed = -jumpPower;
+		}
 	}
 	
 	public void walk(int direction){
 		switch(direction){
 		case RIGHT:
-			hspeed += speed;
+			hspeed += getSpeed();
 			break;
 		
 		case LEFT:
-			hspeed -= speed;
+			hspeed -= getSpeed();
 			break;
 		}
 	}
@@ -74,8 +100,8 @@ public class Entity extends InteractiveObject {
 			if(!onGround())vspeed += gravity;
 		}
 		
-		if(hspeed > maxSpeed || hspeed < maxSpeed*-1){
-			hspeed = Math.signum(hspeed)*maxSpeed;
+		if(hspeed > getMaxSpeed() || hspeed < getMaxSpeed() * -1){
+			hspeed = Math.signum(hspeed) * getMaxSpeed();
 		}
 		else{
 			hspeed = Main.increaseTowardsZero(hspeed, friction);
@@ -105,4 +131,32 @@ public class Entity extends InteractiveObject {
 
 		}
 	}
+	
+	public void addSpeedBuff(double buff){
+		speedMods.add(buff);
+	}
+	
+	public void removeSpeedBuff(double buff){
+		speedMods.remove(buff);
+	}
+	
+	public static double sumOfList(List<Double> list) {
+	     double sum= 0; 
+	     for (double d:list)
+	         sum = sum + d;
+	     return sum;
+	}
+	
+	private void setSpeeds(){
+
+	}
+	
+	public double getSpeed(){
+		return speed * (1 + sumOfList(speedMods));
+	}
+	
+	public double getMaxSpeed(){
+		return maxSpeed * (1 + sumOfList(speedMods));
+	}
+
 }

@@ -8,7 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;
 
 public abstract class InteractiveObject extends RenderableObject{
-	public float x, y;
+	public float x, y, prevX, prevY;
 	
 	public Shape hitbox;
 	public boolean solid;
@@ -19,6 +19,8 @@ public abstract class InteractiveObject extends RenderableObject{
 		list.add(this);
 		this.x = x;
 		this.y = y;
+		prevX = x;
+		prevY = y;
 	}
 	
 	protected void updateHitbox(){
@@ -35,8 +37,14 @@ public abstract class InteractiveObject extends RenderableObject{
 	@Override
 	public void update() {
 		updateHitbox();
+		setPrevCord();
 	}
 	
+	private void setPrevCord() {
+		prevX = x;
+		prevY = y;
+	}
+
 	public Shape getHitbox(){
 		return hitbox;
 	}

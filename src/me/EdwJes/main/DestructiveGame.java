@@ -1,7 +1,9 @@
 package me.EdwJes.main;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import me.EdwJes.main.input.PlayerInput;
 import me.EdwJes.main.objects.RenderableObject;
@@ -34,7 +36,7 @@ public class DestructiveGame implements Game {
 		Main.input = container.getInput();
 		testEntity = new Entity(40, Main.WINDOW_HEIGHT/2);
 		player = new PlayerInput(testEntity);
-		new Block(32, Main.WINDOW_HEIGHT - 64, 7, 4); new Block(32*5, Main.WINDOW_HEIGHT - 80, 5, 4);
+		new Block(32, Main.WINDOW_HEIGHT - 64, 7, 4); new Block(32*5, Main.WINDOW_HEIGHT - 80, 22, 4);
 
 
 	}
@@ -49,10 +51,13 @@ public class DestructiveGame implements Game {
 		
 		g.translate(-Main.view.x, -Main.view.y);
 		stringList.add("FPS: " + Main.getContainer().getFPS());
-		stringList.add("vspeed: " + testEntity.vspeed);
 		stringList.add("hspeed: " + testEntity.hspeed);
-		stringList.add("x: " + testEntity.x);
-		stringList.add("y: " + testEntity.y);
+		stringList.add("vspeed: " + testEntity.vspeed);
+		stringList.add("test1: "  + (testEntity.prevX - testEntity.x));
+		stringList.add("test2: "  + (testEntity.prevY - testEntity.y));
+		stringList.add("x: "      + testEntity.x);
+		stringList.add("y: "      + testEntity.y);
+		stringList.add("speedMod: "    + Entity.sumOfList(testEntity.speedMods));
 		
 		drawList(g, stringList, 0, 0);
 
@@ -61,8 +66,8 @@ public class DestructiveGame implements Game {
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
 		List<Updater> tempList = Updater.list;
-		for(Updater object: tempList){
-			object.callUpdate();
+		for(int i = 0; i < tempList.size(); i ++){
+			tempList.get(i).update();
 		}
 	}
 	

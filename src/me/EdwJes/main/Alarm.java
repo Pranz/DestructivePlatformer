@@ -18,7 +18,10 @@ public abstract class Alarm extends Updater {
 	}
 	
 	@Override public void update(){
-		if(ticks == maxTicks) execute();
+		if(ticks == maxTicks){
+			execute();
+			ticks++;
+		}
 		else if(ticks < maxTicks) ticks++;
 	}
 	

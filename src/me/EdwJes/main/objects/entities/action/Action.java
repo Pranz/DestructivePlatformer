@@ -1,6 +1,7 @@
-package me.EdwJes.main.objects.entities;
+package me.EdwJes.main.objects.entities.action;
 
 import me.EdwJes.main.Alarm;
+import me.EdwJes.main.objects.entities.Entity;
 
 public abstract class Action {
 	
@@ -9,19 +10,19 @@ public abstract class Action {
 	 * @author Jesper Fridefors
 	 */
 	
-	int delay,
-	afterLag;
-	double speedModifier;
+	protected int delay, afterLag;
+	public double speedModifier;
+	public Entity ent;
 	
-	Entity ent;
+	boolean attacking = false;
 	
 	public Action(Entity ent){
 		this.ent = ent;
 	}
 	
 	final public void executeAction(){
-		if(conditionsAreMet()){
-
+		if(conditionsAreMet() && !attacking){
+			attacking = true;
 			preAction();
 			new Alarm(delay){
 				@Override
@@ -33,6 +34,7 @@ public abstract class Action {
 						@Override
 						public void execute(){
 							resolve();
+							attacking = false;
 						}
 					};
 				}
@@ -40,9 +42,14 @@ public abstract class Action {
 		}
 	}
 	
-	public abstract void action();
 	public abstract void preAction();
+	public abstract void action();
 	public abstract void resolve();
+	public abstract void onKeyPress();
+	public abstract void onKeyDown();
+	public abstract void onKeyRelease();
+	
 	public abstract boolean conditionsAreMet();
+	
 
 }
