@@ -7,9 +7,9 @@ public class MeleeAttack extends InstantAction {
 
 	public MeleeAttack(Entity ent) {
 		super(ent);
-		delay = 15;
+		delay = 45;
 		afterLag = 10;
-		speedModifier = -0.45;
+		speedModifier = -0.6;
 	}
 	
 	@Override

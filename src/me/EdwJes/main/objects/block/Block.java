@@ -13,6 +13,7 @@ public class Block extends InteractiveObject{
 		this.width=width;
 		this.height=height;
 		hitbox = new Rectangle(x, y, width * Main.TILE_SIZE, height * Main.TILE_SIZE);
+		solid = true;
 		
 	}
 	

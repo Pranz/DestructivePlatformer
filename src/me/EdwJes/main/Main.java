@@ -11,6 +11,8 @@ public class Main {
 	public final static int WINDOW_WIDTH = 1024,WINDOW_HEIGHT = 756;
 	public final static int TILE_SIZE = 16;
 	
+	static double gravityModifier = 1;
+	
 	static public Input input;
 	public static View view;
 
@@ -41,6 +43,14 @@ public class Main {
 	
 	public static GameContainer getContainer(){
 		return container;
+	}
+	
+	public static double getGravityModifier(){
+		return gravityModifier;
+	}
+	
+	public static void setGravityModifier(double grav){
+		gravityModifier = grav;
 	}
 
 }

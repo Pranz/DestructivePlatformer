@@ -1,9 +1,8 @@
 package me.EdwJes.main;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+
 
 import me.EdwJes.main.input.PlayerInput;
 import me.EdwJes.main.objects.RenderableObject;
@@ -17,8 +16,9 @@ import org.newdawn.slick.SlickException;
 
 public class DestructiveGame implements Game {
 	
-	private Entity testEntity;
-	PlayerInput player;
+	Entity testEntity;
+	public static PlayerInput player;
+	public static Console cmd;
 
 	@Override
 	public boolean closeRequested() {
@@ -37,6 +37,7 @@ public class DestructiveGame implements Game {
 		testEntity = new Entity(40, Main.WINDOW_HEIGHT/2);
 		player = new PlayerInput(testEntity);
 		new Block(32, Main.WINDOW_HEIGHT - 64, 7, 4); new Block(32*5, Main.WINDOW_HEIGHT - 80, 22, 4);
+		cmd = new Console();
 
 
 	}

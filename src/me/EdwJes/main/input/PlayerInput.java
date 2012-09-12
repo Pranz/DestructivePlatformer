@@ -10,6 +10,8 @@ import org.newdawn.slick.Input;
 
 public class PlayerInput {
 
+	public int KEY_ENTER = Input.KEY_ENTER;
+
 	static int inputs = 0;
 	
 	Control control;
@@ -19,7 +21,7 @@ public class PlayerInput {
 
 	public static List<PlayerInput> list = new ArrayList<PlayerInput>();
 	
-	int 
+	public int 
 	KEY_RIGHT,
 	KEY_LEFT,
 	KEY_UP,
@@ -29,6 +31,8 @@ public class PlayerInput {
 	KEY_ACTION2;
 	
 	int KEY_ACTION[] = new int[2];
+	
+	public boolean acceptsInput = true;
 	
 	public PlayerInput(Entity ent){
 		
@@ -58,36 +62,40 @@ public class PlayerInput {
 			@Override
 			public void keyPressed(int key, char keyChar) {
 				super.keyPressed(key, keyChar);
-				
-				if(key == KEY_JUMP){
-					ent.jump();
-				}
-				
-				for(int i=0; i<KEY_ACTION.length; i++){
-					if(key == KEY_ACTION[i]){
-						ent.action[i].onKeyPress();
+				if(acceptsInput){
+					
+					if(key == KEY_JUMP){
+						ent.jump();
+					}
+					
+					for(int i=0; i<KEY_ACTION.length; i++){
+						if(key == KEY_ACTION[i]){
+							ent.action[i].onKeyPress();
+						}
 					}
 				}
 			}
 			
 			@Override
 			public void isKeyDown(){
-				if(pressedKeys.contains(KEY_RIGHT)){
-					ent.walk(ent.RIGHT);
-				}
-				if(pressedKeys.contains(KEY_LEFT)){
-					ent.walk(ent.LEFT);
-				}
-				if(pressedKeys.contains(Input.KEY_D)){
-					Main.view.x -= 2;
-				}
-				if(pressedKeys.contains(Input.KEY_A)){
-					Main.view.x += 2;
-				}
-				
-				for(int i=0; i<KEY_ACTION.length; i++){
-					if(pressedKeys.contains(KEY_ACTION[i])){
-						ent.action[i].onKeyDown();
+				if(acceptsInput){
+					if(pressedKeys.contains(KEY_RIGHT)){
+						ent.walk(ent.RIGHT);
+					}
+					if(pressedKeys.contains(KEY_LEFT)){
+						ent.walk(ent.LEFT);
+					}
+					if(pressedKeys.contains(Input.KEY_D)){
+						Main.view.x -= 2;
+					}
+					if(pressedKeys.contains(Input.KEY_A)){
+						Main.view.x += 2;
+					}
+					
+					for(int i=0; i<KEY_ACTION.length; i++){
+						if(pressedKeys.contains(KEY_ACTION[i])){
+							ent.action[i].onKeyDown();
+						}
 					}
 				}
 			}
@@ -95,28 +103,27 @@ public class PlayerInput {
 			@Override
 			public void keyReleased(int key, char keyChar) {
 				super.keyReleased(key, keyChar);
-				
-				for(int i=0; i<KEY_ACTION.length; i++){
-					if(key == KEY_ACTION[i]){
-						ent.action[i].onKeyRelease();
+				if(acceptsInput){
+					
+					for(int i=0; i<KEY_ACTION.length; i++){
+						if(key == KEY_ACTION[i]){
+							ent.action[i].onKeyRelease();
+						}
 					}
 				}
 			}
 
 			@Override
 			public void inputEnded() {
-				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public void inputStarted() {
-				// TODO Auto-generated method stub
+				
 			}
 
 			@Override
 			public void setInput(Input arg0) {
-				// TODO Auto-generated method stub
 				
 			}
 		};
