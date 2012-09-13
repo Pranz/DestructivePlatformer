@@ -3,6 +3,8 @@ package me.EdwJes.main.objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.EdwJes.main.objects.entities.Entity;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;
@@ -47,5 +49,47 @@ public abstract class InteractiveObject extends RenderableObject{
 
 	public Shape getHitbox(){
 		return hitbox;
+	}
+	
+	public boolean placeMeeting(float x, float y, boolean onlySolids){
+		Shape aBox = getHitbox();
+		aBox.setX(x);
+		aBox.setY(y);
+		for(InteractiveObject o: InteractiveObject.list){
+			if(o != this && (!onlySolids || o.solid) && aBox.intersects(o.getHitbox()))return true;
+		}
+		return false;
+	}
+	
+	public boolean placeMeetingEntity(float x, float y){
+		Shape aBox = getHitbox();
+		aBox.setX(x);
+		aBox.setY(y);
+		for(Entity o: Entity.list){
+			if(o != this && aBox.intersects(o.getHitbox()))return true;
+		}
+		return false;
+	}
+	
+	public Entity getPlaceMeetingEntity(float x, float y){
+		Shape aBox = getHitbox();
+		aBox.setX(x);
+		aBox.setY(y);
+		for(Entity o: Entity.list){
+			if(o != this && aBox.intersects(o.getHitbox()))return o;
+		}
+		return null;
+	}
+	
+	public List<Entity> getAllPlaceMeetingEntity(float x, float y){
+		List<Entity> objList = new ArrayList<Entity>();
+		
+		Shape aBox = getHitbox();
+		aBox.setX(x);
+		aBox.setY(y);
+		for(Entity o: Entity.list){
+			if(o != this && aBox.intersects(o.getHitbox()))objList.add(o);
+		}
+		return objList;
 	}
 }

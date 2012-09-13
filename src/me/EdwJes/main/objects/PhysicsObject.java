@@ -1,8 +1,9 @@
 package me.EdwJes.main.objects;
 
+
+
 import me.EdwJes.main.Main;
 
-import org.newdawn.slick.geom.Shape;
 
 /**
  * Any object affected by basic physics like gravity, vertical and horizontal speed.
@@ -61,15 +62,7 @@ public abstract class PhysicsObject extends InteractiveObject {
 		}
 	}
 	
-	public boolean placeMeeting(float x, float y, boolean onlySolids){
-		Shape aBox = getHitbox();
-		aBox.setX(x);
-		aBox.setY(y);
-		for(InteractiveObject o: InteractiveObject.list){
-			if(o != this && (!onlySolids || o.solid) && aBox.intersects(o.getHitbox()))return true;
-		}
-		return false;
-	}
+
 	
 	public void applyForces(){
 		if(vspeed >= (maxFallSpeed-gravity * Main.getGravityModifier())){

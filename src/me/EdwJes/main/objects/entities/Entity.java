@@ -26,12 +26,14 @@ public class Entity extends PhysicsObject {
 	public Action[] action;
 	
 	public List<Double> speedMods = new ArrayList<Double>();
+	static public List<Entity> list = new ArrayList<Entity>();
 	
 	public double jumpPower = 11,
 	speed = 0.7;
 
 	public Entity(float x, float y){
 		super(x, y);
+		list.add(this);
 		action = new Action[ACTIONS];
 		action[0] = new MeleeAttack(this);
 		action[1] = new MeleeAttack(this);

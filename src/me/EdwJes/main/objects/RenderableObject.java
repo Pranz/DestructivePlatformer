@@ -14,6 +14,8 @@ public abstract class RenderableObject extends GameObject {
 	}
 	
 	public abstract void render(Graphics g);
+	
+
 
 
 }

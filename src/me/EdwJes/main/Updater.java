@@ -24,6 +24,10 @@ public abstract class Updater {
 	}
 	
 	public final void destroy(){
+		/**
+		 * removes the object from the updater list, thus making it "dead" and possibly removing the only reference to it.
+		 * 
+		 */
 		noUpdate();
 		activated = false;
 		onDestroy();
