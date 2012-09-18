@@ -45,7 +45,7 @@ public class DestructiveGame implements Game {
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.translate(Main.view.x, Main.view.y);
-		for(RenderableObject object: RenderableObject.list){
+		for(RenderableObject object: ListHandler.get().getList(ListHandler.RENDERABLEOBJECT, RenderableObject.class)){
 			object.render(g);
 		}
 		List<String> stringList = new ArrayList<String>();
@@ -66,7 +66,7 @@ public class DestructiveGame implements Game {
 
 	@Override
 	public void update(GameContainer container, int delta) throws SlickException {
-		List<Updater> tempList = Updater.list;
+		List<Updater> tempList = ListHandler.get().getList(ListHandler.UPDATER);
 		for(int i = 0; i < tempList.size(); i ++){
 			tempList.get(i).update();
 		}

@@ -13,7 +13,6 @@ public abstract class Alarm extends Updater {
 	
 	public Alarm(int maxTicks){
 		super();
-		list.add(this);
 		this.maxTicks = maxTicks;
 	}
 	

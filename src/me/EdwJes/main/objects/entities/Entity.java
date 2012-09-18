@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.newdawn.slick.geom.Rectangle;
 
+import me.EdwJes.main.ListHandler;
 import me.EdwJes.main.Main;
 import me.EdwJes.main.objects.PhysicsObject;
 import me.EdwJes.main.objects.entities.action.Action;
@@ -26,14 +27,13 @@ public class Entity extends PhysicsObject {
 	public Action[] action;
 	
 	public List<Double> speedMods = new ArrayList<Double>();
-	static public List<Entity> list = new ArrayList<Entity>();
 	
 	public double jumpPower = 11,
 	speed = 0.7;
 
 	public Entity(float x, float y){
 		super(x, y);
-		list.add(this);
+		ListHandler.get().add(this, ListHandler.ENTITY);
 		action = new Action[ACTIONS];
 		action[0] = new MeleeAttack(this);
 		action[1] = new MeleeAttack(this);

@@ -447,7 +447,7 @@ class ConsoleOutputText extends Updater{
 	}
 	
 	public void remove(){
-		list.remove(this);
+		ListHandler.get().getList(ListHandler.RENDERABLEOBJECT).remove(this);
 	}
 	
 	

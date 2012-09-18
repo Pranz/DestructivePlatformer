@@ -3,6 +3,7 @@ package me.EdwJes.main.objects;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.EdwJes.main.ListHandler;
 import me.EdwJes.main.objects.entities.Entity;
 
 import org.newdawn.slick.Color;
@@ -14,11 +15,10 @@ public abstract class InteractiveObject extends RenderableObject{
 	
 	public Shape hitbox;
 	public boolean solid;
-	
-	static public List<InteractiveObject> list = new ArrayList<InteractiveObject>();
-	
+
 	public InteractiveObject(float x, float y){
-		list.add(this);
+		super();
+		ListHandler.get().add(this, ListHandler.INTERACTIVEOBJECT);
 		this.x = x;
 		this.y = y;
 		prevX = x;
@@ -55,7 +55,7 @@ public abstract class InteractiveObject extends RenderableObject{
 		Shape aBox = getHitbox();
 		aBox.setX(x);
 		aBox.setY(y);
-		for(InteractiveObject o: InteractiveObject.list){
+		for(InteractiveObject o: ListHandler.get().getList(ListHandler.INTERACTIVEOBJECT, InteractiveObject.class)){
 			if(o != this && (!onlySolids || o.solid) && aBox.intersects(o.getHitbox()))return true;
 		}
 		return false;
@@ -65,7 +65,7 @@ public abstract class InteractiveObject extends RenderableObject{
 		Shape aBox = getHitbox();
 		aBox.setX(x);
 		aBox.setY(y);
-		for(Entity o: Entity.list){
+		for(Entity o: ListHandler.get().getList(ListHandler.ENTITY, Entity.class)){
 			if(o != this && aBox.intersects(o.getHitbox()))return true;
 		}
 		return false;
@@ -75,7 +75,7 @@ public abstract class InteractiveObject extends RenderableObject{
 		Shape aBox = getHitbox();
 		aBox.setX(x);
 		aBox.setY(y);
-		for(Entity o: Entity.list){
+		for(Entity o: ListHandler.get().getList(ListHandler.ENTITY, Entity.class)){
 			if(o != this && aBox.intersects(o.getHitbox()))return o;
 		}
 		return null;
@@ -87,7 +87,7 @@ public abstract class InteractiveObject extends RenderableObject{
 		Shape aBox = getHitbox();
 		aBox.setX(x);
 		aBox.setY(y);
-		for(Entity o: Entity.list){
+		for(Entity o: ListHandler.get().getList(ListHandler.ENTITY, Entity.class)){
 			if(o != this && aBox.intersects(o.getHitbox()))objList.add(o);
 		}
 		return objList;

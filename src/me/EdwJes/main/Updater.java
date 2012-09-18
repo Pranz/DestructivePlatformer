@@ -1,17 +1,12 @@
 package me.EdwJes.main;
 
-import java.util.List;
-import java.util.ArrayList;
-
 public abstract class Updater {
 	
 	boolean activated;
 	
-	public static List<Updater> list = new ArrayList<Updater>();
-	
 	public Updater(){
 		activated = true;
-		list.add(this);
+		ListHandler.get().add(this);
 		
 	}
 	
@@ -28,16 +23,12 @@ public abstract class Updater {
 		 * removes the object from the updater list, thus making it "dead" and possibly removing the only reference to it.
 		 * 
 		 */
-		noUpdate();
+		ListHandler.get().remove(this);
 		activated = false;
 		onDestroy();
 	}
 	
 	public void onDestroy(){}
-	
-	public void noUpdate(){
-		if(list.contains(this))
-			list.remove(this);
-	}
+
 
 }

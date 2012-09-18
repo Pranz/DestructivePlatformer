@@ -9,7 +9,7 @@ import me.EdwJes.main.objects.entities.Entity;
  * Any body causing hits.
  * 
  * @param relativePos If the position is relative to the host, i.e if the host moves by [dx, dy], the bullet moves by [dx, dy]
- * @param lifespan The amount of frames the bullet is alive. Enter 0 for infinite. You should use a custom destroy system in this case.
+ * @param lifespan The amount of frames the bullet is alive. Enter 0 for infinite. You should use a custom destroy system in that case.
  */
 
 public abstract class Bullet extends InteractiveObject {

@@ -11,6 +11,8 @@ public class Main {
 	public final static int WINDOW_WIDTH = 1024,WINDOW_HEIGHT = 756;
 	public final static int TILE_SIZE = 16;
 	
+	public static ListHandler listHandler;
+	
 	static double gravityModifier = 1;
 	
 	static public Input input;
@@ -25,6 +27,7 @@ public class Main {
 			}
 	}
 	public static AppGameContainer createAppGameContainer() throws SlickException{
+		listHandler = ListHandler.get();
 		AppGameContainer app;
 		app=new AppGameContainer(new DestructiveGame(), 1024, 756, false);
 		app.setUpdateOnlyWhenVisible(false);
@@ -52,5 +55,7 @@ public class Main {
 	public static void setGravityModifier(double grav){
 		gravityModifier = grav;
 	}
+	
+
 
 }

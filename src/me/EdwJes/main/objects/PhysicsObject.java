@@ -2,6 +2,7 @@ package me.EdwJes.main.objects;
 
 
 
+import me.EdwJes.main.ListHandler;
 import me.EdwJes.main.Main;
 
 
@@ -22,6 +23,7 @@ public abstract class PhysicsObject extends InteractiveObject {
 
 	public PhysicsObject(float x, float y) {
 		super(x, y);
+		ListHandler.get().add(this, ListHandler.PHYSICSOBJECT);
 	}
 	
 	@Override
