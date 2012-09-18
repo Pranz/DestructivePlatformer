@@ -57,12 +57,5 @@ public class ListHandler {
 			if (list[i].contains(obj)) list[i].remove(obj);
 		}
 	}
-	
-	public void remove(Updater obj, int l){
-		if (l > 0){
-			list[l].remove(obj);
-		}
-		list[0].remove(obj);
-	}
 
 }

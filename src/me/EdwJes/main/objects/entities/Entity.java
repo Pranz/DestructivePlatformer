@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.newdawn.slick.geom.Rectangle;
 
+import me.EdwJes.main.Alarm;
 import me.EdwJes.main.ListHandler;
 import me.EdwJes.main.Main;
 import me.EdwJes.main.objects.PhysicsObject;
@@ -30,6 +31,8 @@ public class Entity extends PhysicsObject {
 	
 	public double jumpPower = 11,
 	speed = 0.7;
+	
+	Entity ent = this;
 
 	public Entity(float x, float y){
 		super(x, y);
@@ -48,6 +51,10 @@ public class Entity extends PhysicsObject {
 		gravity = 0.4;
 		vspeed = 0;
 		hspeed = 0;
+		
+
+		
+
 	}
 	
 	@Override
